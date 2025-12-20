@@ -1,0 +1,157 @@
+const { Module } = require("../lib/plugins");
+const db = require("../lib/database/settingdb");
+const config = require("../config");
+const { getTheme } = require("../Themes/themes");
+const theme = getTheme();
+
+// 🔹 Auto Status Seen
+Module({
+  command: "autostatus",
+  package: "owner",
+  description: "Toggle auto view WhatsApp status",
+})(async (message, match) => {
+  if (!message.isFromMe) return message.send(theme.isfromMe);
+
+  const input = match?.trim()?.toLowerCase();
+
+  if (input === "on" || input === "off") {
+    await db.setGlobal("autostatus_seen", input === "on");
+    return message.send(
+      `✅ *Auto Status Seen is now ${input === "on" ? "ON" : "OFF"}*`
+    );
+  }
+
+  const { autostatus_seen } = db.getMultiple(
+    null,
+    ["autostatus_seen"],
+    { autostatus_seen: config.STATUS_SEEN || false }
+  );
+
+  return message.send(
+    `⚙️ *Auto Status Seen*\n> Status: ${
+      autostatus_seen ? "✅ ON" : "❌ OFF"
+    }\n\nUse:\n• autostatus on\n• autostatus off`
+  );
+});
+
+// 🔹 Auto Typing
+Module({
+  command: "autotyping",
+  package: "owner",
+  description: "Toggle auto typing",
+})(async (message, match) => {
+  if (!message.isFromMe) return message.send(theme.isfromMe);
+
+  const input = match?.trim()?.toLowerCase();
+
+  if (input === "on" || input === "off") {
+    await db.setGlobal("autotyping", input === "on");
+    return message.send(
+      `✅ *Auto Typing is now ${input === "on" ? "ON" : "OFF"}*`
+    );
+  }
+
+  const { autotyping } = db.getMultiple(
+    null,
+    ["autotyping"],
+    { autotyping: config.AUTOTYPING || false }
+  );
+
+  return message.send(
+    `⚙️ *Auto Typing*\n> Status: ${
+      autotyping ? "✅ ON" : "❌ OFF"
+    }\n\nUse:\n• autotyping on\n• autotyping off`
+  );
+});
+
+
+// 🔹 Auto React to Messages
+Module({
+  command: "autoreact",
+  package: "owner",
+  description: "Toggle auto react",
+})(async (message, match) => {
+  if (!message.isFromMe) return message.send(theme.isfromMe);
+
+  const input = match?.trim()?.toLowerCase();
+
+  if (input === "on" || input === "off") {
+    await db.setGlobal("autoreact", input === "on");
+    return message.send(
+      `✅ *Auto React is now ${input === "on" ? "ON" : "OFF"}*`
+    );
+  }
+
+  const { autoreact } = db.getMultiple(
+    null,
+    ["autoreact"],
+    { autoreact: config.AUTOREACT || false }
+  );
+
+  return message.send(
+    `⚙️ *Auto React*\n> Status: ${
+      autoreact ? "✅ ON" : "❌ OFF"
+    }\n\nUse:\n• autoreact on\n• autoreact off`
+  );
+});
+
+// 🔹 Anti Call
+Module({
+  command: "anticall",
+  package: "owner",
+  description: "Block users who call the bot",
+})(async (message, match) => {
+  if (!message.isFromMe) return message.send(theme.isfromMe);
+  const input = match?.trim().toLowerCase();
+
+  if (input === "on" || input === "off") {
+    await message.react("⏳");
+    const result = await db.setGlobal(
+      "anticall",
+      input === "on" ? "true" : "false"
+    );
+    await message.react(result ? "✅" : "❌");
+    return await message.send(
+      result
+        ? `✅ *AntiCall is now \`${input.toUpperCase()}\`*`
+        : "❌ *Error updating AntiCall*"
+    );
+  }
+
+  const status = (await db.getGlobal("anticall")) === "true";
+  return await message.send(
+    `⚙️ *AntiCall*\n> Status: ${
+      status ? "✅ ON" : "❌ OFF"
+    }\n\nUse:\n• anticall on\n• anticall off`
+  );
+});
+
+// 🔹 Auto Read
+Module({
+  command: "autoread",
+  package: "owner",
+  description: "Toggle auto read messages",
+})(async (message, match) => {
+  if (!message.isFromMe) return message.send(theme.isfromMe);
+
+  const input = match?.trim()?.toLowerCase();
+
+  if (input === "on" || input === "off") {
+    await db.setGlobal("autoread", input === "on");
+    return message.send(
+      `✅ *Auto Read is now ${input === "on" ? "ON" : "OFF"}*`
+    );
+  }
+
+  const { autoread } = db.getMultiple(
+    null,
+    ["autoread"],
+    { autoread: config.AUTOREAD || false }
+  );
+
+  return message.send(
+    `⚙️ *Auto Read*\n> Status: ${
+      autoread ? "✅ ON" : "❌ OFF"
+    }\n\nUse:\n• autoread on\n• autoread off`
+  );
+});
