@@ -1,33 +1,40 @@
+
+
+
+
+
+
+
+
 const fs = require("fs");
 const path = require("path");
 const envPath = path.join(__dirname, "config.env");
-
 if (fs.existsSync(envPath)) {
   require("dotenv").config({ path: envPath });
 }
-
 const isTrue = (x) => String(x).toLowerCase() === "true";
 
 module.exports = {
   // ================= SESSION ================= //
   SESSION_ID:
     process.env.SESSION_ID ||
-    "𓂃ᷱ᪳𝘅_𝗸𝗶𝗿𝗮_𝐁𓋜𝐓≈qbyeh282^☁️",
+    "𓂃ᷱ᪳𝘅_𝗸𝗶𝗿𝗮_𝐁𓋜𝐓≈qbyeh282^☁️", // add your session id here
+
+  // ================= DATABASE ================= //
+  DATABASE_URL: process.env.DATABASE_URL || "",
 
   // ================= MENU ================= //
   MENU_INFO:
     process.env.MENU_INFO ||
-    "𝐐𝐔𝐄𝐄𝐍-𝐒𝐇𝐑𝐀𝐁𝐎𝐍𝐈,https://www.rabbit.zone.id/tgwheu.jpg",
+    "𝑸𝒖𝒆𝒆𝒏-𝑺𝒉𝒓𝒂𝒃𝒐𝒏𝒊,*𝑴𝒓-𝒓𝒂𝒃𝒃𝒊𝒕*,https://www.rabbit.zone.id/t3d94d.jpg",
+  // name,desc,link,type(image/video/gif)
 
-  THEME: process.env.THEME || "t",
+  THEME: process.env.THEME || "t", // Garfield
 
   // ================= BOT MODE ================= //
-  WORK_TYPE: process.env.WORK_TYPE || "private",
+  WORK_TYPE: process.env.WORK_TYPE || "public",
   prefix: process.env.PREFIX || ".",
-  BOT_NAME: process.env.BOT_NAME || "𝐐𝐮𝐞𝐞𝐧-𝐒𝐡𝐫𝐚𝐛𝐨𝐧𝐢",
-
-  // ================= OWNER ================= //
-  OWNER_NAME: process.env.OWNER_NAME || "𝑴𝒓-𝒓𝒂𝒃𝒃𝒊𝒕",
+  BOT_NAME: process.env.BOT_NAME || "𝑸𝒖𝒆𝒆𝒏-𝑺𝒉𝒓𝒂𝒃𝒐𝒏𝒊💞",
 
   // ================= FEATURES ================= //
   STATUS_REACT: isTrue(process.env.STATUS_REACT) || false,
@@ -35,4 +42,6 @@ module.exports = {
   AUTOTYPING: isTrue(process.env.AUTOTYPING) || false,
   AUTOREACT: isTrue(process.env.AUTOREACT) || false,
   STATUS_SEEN: isTrue(process.env.STATUS_SEEN) || false,
+
+  // =========================================== //
 };
