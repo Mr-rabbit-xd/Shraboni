@@ -18,7 +18,7 @@ module.exports = {
   // ================= SESSION ================= //
   SESSION_ID:
     process.env.SESSION_ID ||
-    "𓂃ᷱ᪳𝘅_𝗸𝗶𝗿𝗮_𝐁𓋜𝐓≈qbyeh282^☁️", // add your session id here
+    "STARK-MD~2BsWFJ7L#HAS1ChTDHfZUN-HQxZatcfkqSQC3bowLKdFEY3RO-IM", // add your session id here
 
   // ================= DATABASE ================= //
   DATABASE_URL: process.env.DATABASE_URL || "",
